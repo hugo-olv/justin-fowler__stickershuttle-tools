@@ -44,7 +44,7 @@ const CONFIG = {
          *     For example, you can't set @sizeRange: ['1x1', '30x30'] with a stickermule-price.json ranging from '1x1' to '20x20'.
          *     The final product will lack the prices from '20x20' to '30x30'.
          * 
-         * @sizeRange - Required. Size variants from Min to Max for the product (in X in). Eg: ['1x1', '20x20']. Array of 2 strings.
+         * @sizeRange - Required. Size variants range from Min to Max for the product (in X in). Eg: ['1x1', '20x20']. Array of 2 strings.
          * @productOptions - Optional. Options for the product. Eg: { 'Vendor': 'Stickermule', 'Tags': 'custom-config' }. Object.
          * @variantsOptions - Optional. Options for each variant. Eg: { 'Variant Inventory Qty': '0', 'Variant SKU': 'SKU123', }. Object.
          */
