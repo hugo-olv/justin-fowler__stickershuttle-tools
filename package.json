@@ -1,0 +1,16 @@
+{
+  "name": "stickershuttle-tools",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "generate": "node writeProductsToCsv.js",
+    "stickermule-scrape": "node stickermulePriceScrapper.js"
+  },
+  "author": "Hugo Oliveira",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.26.1",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  }
+}
