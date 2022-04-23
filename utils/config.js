@@ -26,7 +26,7 @@ const CONFIG = {
         'Variant Weight Unit': 'lb',
         'Cost per item': '0.10',
     },
-    // Each {} below products represent a product to be generated in the final CSV.
+    // Each block {} below products represent a product to be generated in the final CSV.
     products: [
         /* 
          * @title - Required. The title of the product for Shopify. Strings.
