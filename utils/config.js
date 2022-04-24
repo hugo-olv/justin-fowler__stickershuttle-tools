@@ -26,18 +26,18 @@ const CONFIG = {
         'Variant Weight Unit': 'lb',
         'Cost per item': '0.10',
     },
-    // Each block {} below products represent a product to be generated in the final CSV.
+    // Each block {} below represent a product to be generated in the final CSV.
     products: [
         /* 
          * @title - Required. The title of the product for Shopify. Strings.
          * @handleBase - Required. The base handle of the product for Shopify. Strings.
          * 
-         * @unitPrice - Optional. A price for 1 in². Number.
+         * @unitPrice - Optional. A price for 1 in². Calcul: (width * height * unitPrice). Number.
          * @stickermulePrices - Optional. A list of prices scrapped from Stickermule. Object.
          * 
          * You can set either @unitPrice or @stickermulePrices (you must define one). If you set both, the @unitPrice will be used. 
          * The prices from stickermule are already imported to this file. If you want a product to use these prices,
-         * just set the following field => stickermulePrices: STICKERMULE_PRICE inside the product {}.
+         * just set the following field => stickermulePrices: STICKERMULE_PRICE inside the product block {}.
          * Don't forget to remove or comment the @unitPrice field if using stickermule prices.
          * /!\ Be carefull that your @sizeRange values don't overlap those from the strickermule-price.json file.
          *     The stickermule-price.json file range from '1x1' to '20x20' by default. 
