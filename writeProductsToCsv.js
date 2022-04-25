@@ -5,11 +5,15 @@ const { CONFIG } = require('./utils/config.js')
 const getData = () => {
     let result = []
 
-    const getPricePerInSquare = (width, height, unitPrice) => {
-        return parseFloat((width * height) * unitPrice).toFixed(2)
+    const formatPrice = price => {
+        return parseFloat(price).toFixed(2)
     }
 
-    CONFIG.products.forEach(({ title, handleBase, unitPrice, stickermulePrices, sizeRange, productOptions, variantsOptions }) => {
+    // const getPricePerInSquare = (width, height, basePrice) => {
+    //     return formatPrice(width * height * basePrice)
+    // }
+
+    CONFIG.products.forEach(({ title, handleBase, basePrice, sizeRange, productOptions, variantsOptions }) => {
         console.log(`--------------- ${title} ---------------`)
         let counter = 1
         let keyIdx = 0
@@ -49,7 +53,10 @@ const getData = () => {
 
             for (let b = bStart; b <= bEnd; b++) {
                 const value = `${i}x${b}`
-                const price = unitPrice ? getPricePerInSquare(i, b, unitPrice) : stickermulePrices[value].pu
+                // @basePrice is a callback function specified for each product in the config.js file. 
+                // It take a width and height argument. This way the user have access to width and height variable inside config.js.
+                // He can then provide his own equation that will be run for each variant.
+                const price = basePrice ? formatPrice(basePrice(i, b)) : 0
                 const handle = `${handleBase}-${keys[keyIdx].from}-${keys[keyIdx].to}`
 
                 const variant = {
@@ -57,7 +64,7 @@ const getData = () => {
                     Handle: handle,
                     'Option1 Value': value,
                     'Variant Price': price,
-                    ...CONFIG.commonVariantsOptions,
+                    ...CONFIG.defaultVariantsOptions,
                     ...variantsOptions
                 }
 
@@ -66,7 +73,7 @@ const getData = () => {
                     const product = {
                         ...variant,
                         Title: title,
-                        ...CONFIG.commonProductsOptions,
+                        ...CONFIG.defaultProductsOptions,
                         ...productOptions,
                     }
 
@@ -104,5 +111,8 @@ csvWriter
     .then(() =>
         console.log(`
     The CSV file products.csv was written successfully to the out directory. You can now import it to shopify.
-    Copy and paste the above products handles to their respective products in product-calculator-config.js
+    If you have remove or add a product or edit their @handleBase you must copy/paste the above products handles 
+    to their respective products inside the 'cut' section from the pricing-calculator-config.js in your theme code.
+
+    If you don't remember just copy/paste it anyway you should be fine :)
         `));

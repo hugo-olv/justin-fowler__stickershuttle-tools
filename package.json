@@ -6,6 +6,7 @@
     "generate": "node writeProductsToCsv.js",
     "stickermule-scrape": "node stickermulePriceScrapper.js"
   },
+  "bin": "writeProductsToCsv.js",
   "author": "Hugo Oliveira",
   "license": "ISC",
   "dependencies": {
