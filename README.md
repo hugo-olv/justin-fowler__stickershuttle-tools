@@ -1,9 +1,8 @@
-# Tools for managing shopify products.
-A set of node.js tools to manage shopify products that belong to the pricing calculator app.
+# Tool for managing shopify products.
+A node.js tool to manage shopify products that belong to the pricing calculator app.
 
-This project includes :
-- A script to generate splitted products in a given size range.
-- A scrapper that generate a list of stickermule.com custom stickers prices.
+This project include :
+- A script to generate splitted products between a given size range.
 
 ## Introduction
 Shopify have a limit of 100 variants per products. The pricing calculator use a workaround to bypass this limitation that consist of splitting the products
@@ -30,10 +29,13 @@ Step 2: [Download](https://github.com/hugo-cdl/justin-fowler__stickershuttle-too
 
 Step 3: Locate the folder path of the project on your computer and copy it. For example, mine is : C:\dev\clients\justin-fowler\tools
 
-Step 4: Open a terminal (open start then type command prompt on Windows), then write the following commands successively and hit enter :
+![screenshot of foler path](https://i.ibb.co/LS8G2cD/screen-path.jpg)
+
+Step 4: Open a terminal (start > then type command prompt on Windows) then write the following commands successively and hit enter :
 ```
-cd [project folder path]
+cd [your project folder path]
 ```
+You'll need to run this command each time you want to use the tool.
 ```
 npm install
 ```
@@ -45,24 +47,28 @@ This file represent an array of all the products you want to generate. Each prod
 
 The most important field are set at the root of each product block {}.
 ```
-@title, @handleBase, @unitPrice, @stickermulePrices
+@title, @handleBase, @sizeRange, @basePrice
 ```
-The rest can be set in bulk inside the respective @productOptions {} and @variantsOptions {} block and are optional.
+The rest can be set in bulk inside @productOptions {} and @variantsOptions {} block and are optional.
 
-You also have to provide a sizeRange which will tell the script how many splitted products and their corresponding variants it has to render.
+The sizeRange will tell the script how many splitted products and their corresponding variants it has to generate.
 
 If you want to add or remove a product, simply add or remove a block inside the @products field.
 
-🚨 If you remove a product from the CSV generator, you will also need to manually delete it from Shopify.
+🚨 If you remove a product from the CSV generator, you will also need to manually remove it from Shopify.
 
 Example of a product block :
 ```
         {
             title: 'Custom Circle/Oval Stickers',
             handleBase: 'custom-circle-oval-stickers',
-            // unitPrice: 1.15,
-            stickermulePrices: STICKERMULE_PRICE,
             sizeRange: ['1x1', '20x20'],
+            basePrice: (width, height) => {
+                // f(x) = a * x
+                const unitPrice = 0.10 
+                const x = width * height 
+                return (unitPrice * x)
+            },
             productOptions: {
                 'Image Src': 'https://cdn.shopify.com/s/files/1/0585/0546/1898/files/Circle_c1071b32-0487-496c-abde-3358b11a1d21.png?v=1649343985',
                 'Image Position': '1',
@@ -85,15 +91,11 @@ When you're good with the config, you can run the command below to generate the 
 ```
 npm run generate
 ```
+/!\ Your command line interface need to point to the project folder path. Type cd [your project folder path], then hit enter if needed.
+
 Generate the products CSV file from the config.js values you've provide.
 The result goes to the out folder inside the project under the name of products.csv. Once you've generated it, you can import it directly into Shopify.
 
 A list of the splitted products handles will appear in the console once you have run the command. If you've adding or deleting some product 
 or modified the @sizeRange you'll have to edit it accordingly inside the cut option under the pricing-calculator-config.js file under your 
 theme code assets folder.
-
-```
-npm run stickermule-scrape
-```
-Get and write a list of the prices based on size from stickermule.com. 
-The result goes to the out folder inside the project under the name of stickermule-price.json.
