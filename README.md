@@ -35,7 +35,6 @@ Step 4: Open a terminal (start > then type command prompt on Windows) then write
 ```
 cd [your project folder path]
 ```
-You'll need to run this command each time you want to use the tool.
 ```
 npm install
 ```
