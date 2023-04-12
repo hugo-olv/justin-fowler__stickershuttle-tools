@@ -1,12 +1,12 @@
 const TEMPLATE = {
-  'Handle': '',
-  'Title': '',
+  Handle: '',
+  Title: '',
   'Body (HTML)': '',
-  'Vendor': 'StickerShuttle',
-  'Standardized Product Type': '',
-  'Custom Product Type': '',
-  'Tags': '',
-  'Published': '',
+  Vendor: '',
+  'Product category': '',
+  'Product Type': '',
+  Tags: '',
+  Published: '',
   'Option1 Name': '',
   'Option1 Value': '',
   'Option2 Name': '',
@@ -47,9 +47,9 @@ const TEMPLATE = {
   'Variant Weight Unit': '',
   'Variant Tax Code': '',
   'Cost per item': '',
-  'Status': ''
+  Status: '',
 }
 
 module.exports = {
-  TEMPLATE
+  TEMPLATE,
 }
